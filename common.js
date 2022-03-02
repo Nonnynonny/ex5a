@@ -7,6 +7,16 @@ function validate(p){
 			msg = "Running pace must be between 3 and 10 min/km";
 			return {"status":0,"message":msg,"hour":0,"min":0};
 		}
+}
+function finishTime(p,d){
+		var min = dist * pace;
+		var hour = 0;
+		if(min > 60){
+			hour = Math.floor(min / 60);          
+			min = min % 60;
+		}
+		return {"hour":hour,"min":min};
+}
 
 function calculate(p,d){
 		var msg = "";
@@ -14,14 +24,9 @@ function calculate(p,d){
 		var dist = parseInt(d);
 	//---------------------------
 		var chk = validate(pace);
-		var (chk != null)return chk;
+		if(chk != null)return chk;
 	//---------------------------
-		var min = dist * pace;
-		var hour = 0;
-		if(min > 60){
-			hour = Math.floor(min / 60);          
-			min = min % 60;
-		}
+		var ft = finishTime(pace,dist);
 	//---------------------------
 		msg = "successfully calculated!"
 		return {"status":1,"message":msg,"hour":hour,"min":min};
